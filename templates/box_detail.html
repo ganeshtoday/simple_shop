@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}	
+	<div class="row">
+		<main class="col-md-8">
+			<div class="card" style="width: 36rem;">
+				<div class="card-header">{{ box.name }}</div>
+				<img src="{{ box.image.url }}" class="card-img-top" alt="">
+				<div class="card-body">
+		    		<h6 class="card-subtitle mb-2">${{ box.price|floatformat:"2"|intcomma }}</h6>
+		    		<p class="card-text">{{ box.description }}</p>
+				</div>
+				<div class="card-footer">
+					{% if in_cart %}
+						<a href="{% url 'cart:remove-from-cart' box.slug %}" class="btn btn-warning btn-block">Remove from cart</a>
+					{% else %}
+						<form action="{% url 'cart:add-to-cart' box.slug %}">
+							<div class="form-group">
+							    <label for="quantity">Quantity</label>
+							    <select class="form-control" name="quantity">
+							      <option>1</option>
+							      <option>2</option>
+							      <option>3</option>
+							      <option>4</option>
+							      <option>5</option>
+							    </select>
+							</div>
+							<input type="submit" value="Add to cart" class="btn btn-primary btn-block"></input>
+					</form>
+					{% endif %}
+				</div>
+			</div>
+		</main>
+
+		<aside class="col-md-4">
+			<div class="card" style="width: 22rem;">
+				<div class="card-body">
+					<p class="card-text">Manufacturer: {{ box.manufacturer }}</p>
+					<p class="card-text">Color: {{ box.color }}</p>
+					<p class="card-text">Size: {{ box.size }}</p>
+				</div>
+			</div>
+		</aside>
+
+{% endblock content %}

@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load humanize %}
+
+{% block content %}	
+
+	<h1>Welcome to Dunder Mifflin Infinity 2.0!</h1>
+	<h2>We sell boxes now. Here are the very useful boxes we sell.</h2>
+	<hr/>
+
+	<div class="card-deck mb-3">
+	{% for box in queryset %}
+		<div class="card mb-4 shadow-sm" style="width: 18rem;">
+		  <img src="{{ box.image.url }}" class="card-img-top" alt="">
+		  <div class="card-body">
+		    <h5 class="card-title">{{ box }}</h5>
+		    <h6 class="card-subtitle mb-2 text-muted">${{ box.price|floatformat:"2"|intcomma }}</h6>
+		    <p class="card-text">{{ box.description }}</p>
+		    <a href="{{ box.get_absolute_url }}" class="btn btn-primary">View details</a>
+		  </div>
+		</div>	
+	{% endfor %}
+	</div>	
+
+{% endblock content %}
+
+	

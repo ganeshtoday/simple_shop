@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% load humanize %}
+{% load static %}
+
+{% block content %}	
+	<link href="{% static 'css/stripe_form.css' %}" rel="stylesheet"/>
+
+	<h1>Checkout</h1>
+	<hr/>
+
+	<div class="row">
+		<div class="col-md-4 order-md-2 mb-4">
+	      	<h4 class="d-flex justify-content-between align-items-center mb-3">Your cart</h4>
+			<ul class="list-group mb-3">
+				{% for item in order.items.all %}
+        		<li class="list-group-item d-flex justify-content-between lh-condensed">
+	          		<div>
+	            		<h6 class="my-0">{{ item.box.name }}</h6>
+	            		<small class="text-muted">${{ item.box.price|floatformat:"2"|intcomma }}</small>
+	          		</div>
+          			<span class="text-muted">x{{ item.quantity }}</span>
+        		</li>
+        		{% endfor %}
+	        	<li class="list-group-item d-flex justify-content-between">
+	          		<span>Total</span>
+	          		<strong>${{ order.get_total|floatformat:"2"|intcomma }}</strong>
+	        	</li>
+	      	</ul>
+	    </div>
+		<div class="col-md-8 order md-1">
+			<h4 class="mb-3">Billing details</h4>
+			<form action="{% url 'cart:checkout' %}" method="post" id="payment-form" class="sr-payment-form">
+				{% csrf_token %}
+		        <div class="col-md-12 mb-3">
+		            <label for="cc-name">Name on card</label>
+		            <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+		            <small class="text-muted">Full name as displayed on card</small>
+		            <div class="invalid-feedback">
+		              Name on card is required
+		            </div>
+		        </div>
+		        <div class="col-md-12 mb-3">
+		            <label for="cc-number">Credit or debit card</label>
+		            <div class="sr-input sr-card-element" id="card-element" >
+						<!-- A Stripe Element will be inserted here. -->
+					</div>
+					<!-- Used to display form errors. -->
+					<div class="sr-field-error" id="card-errors" role="alert" ></div>
+				</div>
+		        <button>
+            		<div class="spinner hidden" id="spinner"></div>
+            		<span id="button-text">Submit Payment</span>
+          		</button>
+		    </form>
+		    <div class="sr-result hidden">
+		    	<p>Payment completed<br /></p>
+         		<pre>
+            		<code></code>
+         		 </pre>
+        	</div>
+		</div>
+	</div>
+	
+	<input type="hidden" id="stripe-client-secret" name="stripe-client-secret" value="{{ stripe_client_secret }}" readonly>
+	<input type="hidden" id="stripe-publish-key" name="stripe-publish-key" value="{{ stripe_publish_key }}" readonly>
+	<script src="{% static 'js/stripe_form.js' %}"></script>
+
+{% endblock content %}
