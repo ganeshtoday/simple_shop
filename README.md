@@ -34,22 +34,12 @@ $ source env/bin/activate
 ```
 $ pip install -r requirements.txt
 ```
-8. Run migrations:
-```
-$ python manage.py migrate
-```
+
 
 ### Stripe Settings
 
 At the bottom of `/simple_shop/settings.py`, set your Stripe API secret and publish key values for `STRIPE_SECRET_KEY` and `STRIPE_PUBLISH_KEY` respectively.
 
-### Creating an admin user
-
-You can view and manage all objects, including payments, via the Django admin dashboard. To do so, run the following command and follow the instructions:
-```
-$ python manage.py createsuperuser
-```
-When the server is running, the admin dashboard can be accessed at http://localhost:8000/admin
 
 ### Starting the server
 
@@ -59,13 +49,23 @@ $ python manage.py runserver
 ```
 
 
+### Using the admin dashboard
+
+You can view and manage all objects, including payments, via the Django admin dashboard at [http://localhost:8000/admin](http://localhost:8000/admin). Since this is a demo app, an admin user has already been created for you. The credentials are:
+```
+username: admin
+password: password
+```
+
 ## Using the app
 
 If setup was successful, the app will be running at [http://localhost:8000](http://localhost:8000). You can sign up for a new user account in the app, or log in with the admin user.
 
+
 ### Making purchases
 
 Add some items to your cart, and access the checkout flow. You can then test the payments integration.
+
 
 ### Viewing completed payments
 
