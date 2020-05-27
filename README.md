@@ -55,6 +55,7 @@ Forwarding                    http://4885e61e.ngrok.io -> http://localhost:8000
 You can use either of the Forwarding hosts to receive webhook events.
 
 3. In the (test webhooks page)[https://dashboard.stripe.com/test/webhooks] on the Stripe Dashboard, add a new endpoint. The endpoint should use the ngrok host followed by the path `/cart/payment-complete/`. For the example above, the endpoint should be `http://4885e61e.ngrok.io/cart/payment-complete/`. Make sure to include the trailing slash. Assign the `payment_intent.succeeded` event to the endpoint.
+
 4. At the bottom of `/simple_shop/settings.py`, add a new entry in `ALLOWED_HOSTS` for your ngrok host. For example:
 ```
 ALLOWED_HOSTS = [
