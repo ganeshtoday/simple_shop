@@ -49,6 +49,11 @@ $ python manage.py runserver
 ```
 
 
+## Using the app
+
+If setup was successful, the app will be running at [http://localhost:8000](http://localhost:8000). You can sign up for a new user account in the app, or log in with the admin user (see section below).
+
+
 ### Using the admin dashboard
 
 You can view and manage all objects, including payments, via the Django admin dashboard at [http://localhost:8000/admin](http://localhost:8000/admin). Since this is a demo app, an admin user has already been created for you. The credentials are:
@@ -57,18 +62,13 @@ username: admin
 password: password
 ```
 
-## Using the app
-
-If setup was successful, the app will be running at [http://localhost:8000](http://localhost:8000). You can sign up for a new user account in the app, or log in with the admin user.
-
-
 ### Making purchases
 
-Add some items to your cart, and access the checkout flow. You can then test the payments integration.
+Add some items to your cart and go to the checkout flow. You can then test the payments integration.
 
 
 ### Viewing completed payments
 
 When payments are completed successfully, they are saved in the database. You can view completed payments for all users in the admin dashboard at [http://localhost:8000/admin/shopping_cart/payment/](http://localhost:8000/admin/shopping_cart/payment/).
 
-Alternatively, you can view completed payments for the logged-in user on their [order history page](http://localhost:8000/cart/order-history/).
+Alternatively, you can view completed payments for the logged-in user on their order history page at [http://localhost:8000/cart/order-history/](http://localhost:8000/cart/order-history/).
