@@ -163,8 +163,8 @@ LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Stripe settings - place your API keys here
-STRIPE_PUBLISH_KEY = 'pk_test_dg1ub2rByBFMPQnDsn1vnluG'
-STRIPE_SECRET_KEY = 'sk_test_a3ZlOr4YvrYpnI14wqeI26e8'
+STRIPE_PUBLISH_KEY = ''
+STRIPE_SECRET_KEY = ''
 
 # Allowed hosts for receiving webhooks. Add your ngrok host here to receive webhooks.
 ALLOWED_HOSTS = [
