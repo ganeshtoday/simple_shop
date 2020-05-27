@@ -71,7 +71,9 @@ $ python manage.py runserver
 
 ## Using the app
 
-If setup was successful, the app will be running at [http://localhost:8000](http://localhost:8000). You can sign up for a new user account in the app, or log in with the admin user (see section below).
+If setup was successful, the app will be running at [http://localhost:8000](http://localhost:8000). ngrok should be running as well to receive webhooks.
+
+You can sign up for a new user account in the app, or log in with the admin user (see section below).
 
 
 ### Using the admin dashboard
