@@ -35,7 +35,7 @@ $ pip install -r requirements.txt
 ```
 
 
-### Stripe Settings
+### Stripe settings
 
 At the bottom of `/simple_shop/settings.py`, set your Stripe API secret and publish key values for `STRIPE_SECRET_KEY` and `STRIPE_PUBLISH_KEY` respectively.
 
