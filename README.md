@@ -1,7 +1,6 @@
 # Simple ecommerce site with Stripe payments integration
 
-This is a simple ecommerce website selling boxes, built with Django. Users can purchase these boxes, supported by a Stripe integration. This project was built to demonstrate usage of a Stripe integration.
-
+This is a simple ecommerce website selling boxes, built with Django. Users can purchase these boxes, powered by Stripe. This project was built to demonstrate usage of a Stripe integration.
 
 
 ## Setup
