@@ -81,30 +81,40 @@ def checkout(request):
 @csrf_exempt
 @require_POST
 def payment_complete(request):
+	payload = request.body
+	event = None
+
+	try:
+		event = stripe.Event.construct_from(
+			json.loads(payload), stripe.api_key
+   		)
+	except ValueError as e:
+   		# Invalid payload
+   			return HttpResponse(status=400)
+
+   	# Handle the event
+	if event.type == 'payment_intent.succeeded':
+		payment_intent = event.data.object # contains a stripe.PaymentIntent
+
+		# Get the open order
+		order = get_object_or_404(Order, payment_intent_id=payment_intent['id'])
+
+		# For this simple integration, only handling a scenario where there is 1 charge object. 
+		charge_id = payment_intent['charges']['data'][0]['id']		
 	
-	# Receive a payment_intent.succeeded event
-	jsondata = request.body
-	data = json.loads(jsondata)
+		# Create a payment object and link to the order
+		payment = Payment.objects.create(user=order.user, order=order, total_amount=order.get_total(), stripe_charge_id=charge_id)
 
-	# Retrieve the intent id
-	intent_id = data['data']['object']['id']
+		# Complete the order
+		order.is_ordered = True
+		order.save()
 
-	# Get the open order
-	order = get_object_or_404(Order, payment_intent_id=intent_id)
-
-	# For this simple integration, only handling a scenario where there is 1 charge object. 
-	charge_id = data['data']['object']['charges']['data'][0]['id']
-	
-	# Create a payment object and link to the order
-	payment = Payment.objects.create(user=order.user, order=order, total_amount=order.get_total(), stripe_charge_id=charge_id)
-
-	# Complete the order
-	order.is_ordered = True
-	order.save()
-
-	context = {
-		'order': order
-	}
+		context = {
+			'order': order
+		}
+	else:
+		# Unexpected event type
+		return HttpResponse(status=400)
 
 	return HttpResponse(status=200)
 
