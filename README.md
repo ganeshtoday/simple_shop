@@ -52,7 +52,7 @@ After setup, do the following:
 ```
 Forwarding                    http://4885e61e.ngrok.io -> http://localhost:8000
 ```
-3. In the (test webhooks page)[https://dashboard.stripe.com/test/webhooks] on the Stripe Dashboard, add a new endpoint. The endpoint should use the ngrok host followed by the path `/cart/payment-complete/`. For the example above, the endpoint should be `http://4885e61e.ngrok.io/cart/payment-complete/`. Make sure to include the trailing slash.
+3. In the (test webhooks page)[https://dashboard.stripe.com/test/webhooks] on the Stripe Dashboard, add a new endpoint. The endpoint should use the ngrok host followed by the path `/cart/payment-complete/`. For the example above, the endpoint should be `http://4885e61e.ngrok.io/cart/payment-complete/`. Make sure to include the trailing slash. Assign the `payment_intent.succeeded` event to the endpoint.
 4. At the bottom of `/simple_shop/settings.py`, add a new entry in `ALLOWED_HOSTS` for your ngrok host. For example:
 ```
 ALLOWED_HOSTS = [
@@ -71,7 +71,9 @@ $ python manage.py runserver
 
 ## Using the app
 
-If setup was successful, the app will be running at [http://localhost:8000](http://localhost:8000). You can sign up for a new user account in the app, or log in with the admin user (see section below).
+If setup was successful, the app will be running at [http://localhost:8000](http://localhost:8000). ngrok should be running as well to receive webhooks.
+
+You can sign up for a new user account in the app, or log in with the admin user (see section below).
 
 
 ### Using the admin dashboard
