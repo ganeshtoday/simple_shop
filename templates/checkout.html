@@ -29,7 +29,7 @@
 	    </div>
 		<div class="col-md-8 order md-1">
 			<h4 class="mb-3">Billing details</h4>
-			<form action="{% url 'cart:checkout' %}" method="post" id="payment-form" class="sr-payment-form">
+			<form id="payment-form" class="sr-payment-form">
 				{% csrf_token %}
 		        <div class="col-md-12 mb-3">
 		            <label for="cc-name">Name on card</label>
@@ -61,6 +61,7 @@
 		</div>
 	</div>
 	
+	<input type="hidden" id="ref-code" name="ref-code" value="{{ order.ref_code }}" readonly>
 	<input type="hidden" id="stripe-client-secret" name="stripe-client-secret" value="{{ stripe_client_secret }}" readonly>
 	<input type="hidden" id="stripe-publish-key" name="stripe-publish-key" value="{{ stripe_publish_key }}" readonly>
 	<script src="{% static 'js/stripe_form.js' %}"></script>

@@ -34,11 +34,32 @@ $ source env/bin/activate
 $ pip install -r requirements.txt
 ```
 
-
 ### Stripe settings
 
 At the bottom of `/simple_shop/settings.py`, set your Stripe API secret and publish key values for `STRIPE_SECRET_KEY` and `STRIPE_PUBLISH_KEY` respectively.
 
+
+### Webhook receiver settings
+
+This app uses the `payment_intent.succeeded` event to asynchronously complete the purchase. You will need to set up your local web server to receive webhook events from Stripe. To do so, use (ngrok)[https://ngrok.com/]. Download and install ngrok from the website. Follow the instructions (here)[https://dashboard.ngrok.com/get-started/setup] to set it up.
+
+After setup, do the following:
+1. Start `ngrok` on port 8000
+```
+./ngrok http 8000
+```
+2. Once it is running, you will notice two Forwarding hosts in its console. It will look something like this:
+```
+Forwarding                    http://4885e61e.ngrok.io -> http://localhost:8000
+```
+3. In the (test webhooks page)[https://dashboard.stripe.com/test/webhooks] on the Stripe Dashboard, add a new endpoint. The endpoint should use the ngrok host followed by the path `/cart/payment-complete/`. For the example above, the endpoint should be `http://4885e61e.ngrok.io/cart/payment-complete/`. Make sure to include the trailing slash.
+4. At the bottom of `/simple_shop/settings.py`, add a new entry in `ALLOWED_HOSTS` for your ngrok host. For example:
+```
+ALLOWED_HOSTS = [
+    '4885e61e.ngrok.io',
+    'localhost'
+]
+```
 
 ### Starting the server
 

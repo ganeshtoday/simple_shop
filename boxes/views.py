@@ -19,7 +19,7 @@ def box_detail(request, slug):
 	box_is_in_cart = False
 	
 	try:
-		order_qs = Order.objects.filter(user=request.user)
+		order_qs = Order.objects.filter(user=request.user, is_ordered=False)
 		if order_qs.exists():
 			order = order_qs[0]
 			order_item_qs = OrderItem.objects.filter(box=box)

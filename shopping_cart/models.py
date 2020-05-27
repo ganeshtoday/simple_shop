@@ -1,6 +1,5 @@
 from django.db import models
 from django.conf import settings
-from django.db.models import Sum
 from boxes.models import Box
 
 class OrderItem(models.Model):
@@ -18,6 +17,7 @@ class Order(models.Model):
 	is_ordered = models.BooleanField(default=False)
 	items = models.ManyToManyField(OrderItem)
 	ref_code = models.CharField(max_length=50,null=True)
+	payment_intent_id = models.CharField(max_length=100,null=True)
 
 	def __str__(self):
 		return self.ref_code

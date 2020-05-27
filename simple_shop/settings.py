@@ -148,6 +148,8 @@ STATICFILES_DIRS = [
 STATIC_ROOT = os.path.join(BASE_DIR, 'static_root')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 
+CSRF_COOKIE_SECURE = False
+
 # Django Allauth  settings
 AUTHENTICATION_BACKENDS = [ 
     'django.contrib.auth.backends.ModelBackend',
@@ -161,5 +163,10 @@ LOGIN_REDIRECT_URL = '/'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Stripe settings - place your API keys here
-STRIPE_PUBLISH_KEY = ''
-STRIPE_SECRET_KEY = ''
+STRIPE_PUBLISH_KEY = 'pk_test_dg1ub2rByBFMPQnDsn1vnluG'
+STRIPE_SECRET_KEY = 'sk_test_a3ZlOr4YvrYpnI14wqeI26e8'
+
+# Allowed hosts for receiving webhooks. Add your ngrok host here to receive webhooks.
+ALLOWED_HOSTS = [
+    'localhost',
+]

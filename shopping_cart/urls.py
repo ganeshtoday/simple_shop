@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import add_to_cart, remove_from_cart, order_view, checkout, confirm_order, order_history
+from .views import add_to_cart, remove_from_cart, order_view, checkout, confirm_order, order_history, payment_complete
 
 app_name = 'shopping_cart'
 
@@ -16,6 +16,9 @@ urlpatterns = [
 	path('checkout/',
 		checkout,
 		name='checkout'),
+	path('payment-complete/',
+		payment_complete,
+		name='payment-complete'),
 	path('confirm-order/',
 		confirm_order,
 		name='confirm-order'),

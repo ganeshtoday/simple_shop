@@ -70,10 +70,10 @@ form.addEventListener('submit', function(ev) {
 var orderComplete = function(clientSecret) {
   // Just for the purpose of the sample, show the PaymentIntent response object
   stripe.retrievePaymentIntent(clientSecret).then(function(result) {
-    var paymentIntent = result.paymentIntent;
-
+    
     // Display the result on the page
-    /*var paymentIntentJson = JSON.stringify(paymentIntent, null, 2);
+    /*var paymentIntent = result.paymentIntent;
+    var paymentIntentJson = JSON.stringify(paymentIntent, null, 2);
 
     document.querySelector(".sr-payment-form").classList.add("hidden");
     document.querySelector("pre").textContent = paymentIntentJson;
@@ -83,17 +83,9 @@ var orderComplete = function(clientSecret) {
       document.querySelector(".sr-result").classList.add("expand");
     }, 200);*/
 
-    // Insert the intent into the form so it gets submitted to the server
-    var form = document.getElementById('payment-form');
-    var hiddenInput = document.createElement('input');
-    hiddenInput.setAttribute('type', 'hidden');
-    hiddenInput.setAttribute('name', 'paymentIntent');
-    hiddenInput.setAttribute('value', paymentIntent.id);
-    form.appendChild(hiddenInput);
-
-    // Submit the form
-    form.submit();
-
+    var refCode = document.getElementById("ref-code").value;
+    changeLoadingState(false);
+    window.location.replace("/cart/confirm-order/?ref-code=" + refCode);
   });
 };
 
@@ -118,34 +110,3 @@ var changeLoadingState = function(isLoading) {
     document.querySelector("#button-text").classList.remove("hidden");
   }
 };
-
-
-
-/*  form.addEventListener('submit', function(event) {
-  event.preventDefault();
-
-  stripe.createToken(card).then(function(result) {
-    if (result.error) {
-      // Inform the user if there was an error.
-      var errorElement = document.getElementById('card-errors');
-      errorElement.textContent = result.error.message;
-    } else {
-      // Send the token to your server.
-      stripeTokenHandler(result.token);
-    }
-  });
-});
-
-// Submit the form with the token ID.
-function stripeTokenHandler(token) {
-  // Insert the token ID into the form so it gets submitted to the server
-  var form = document.getElementById('payment-form');
-  var hiddenInput = document.createElement('input');
-  hiddenInput.setAttribute('type', 'hidden');
-  hiddenInput.setAttribute('name', 'stripeToken');
-  hiddenInput.setAttribute('value', token.id);
-  form.appendChild(hiddenInput);
-
-  // Submit the form
-  form.submit();
-}*/
