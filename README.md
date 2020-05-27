@@ -8,7 +8,7 @@ This is a simple ecommerce website selling boxes, built with Django. Users can p
 
 ### Prerequisites
 
-1. Install Python from [the website](https://www.python.org/downloads/) or using your operating system's package manager.
+1. Install the lasest version of Python from [the website](https://www.python.org/downloads/) or using your operating system's package manager.
 
 2. Make sure your version of Python is 3.8.3:
 ```
